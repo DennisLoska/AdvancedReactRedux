@@ -26,3 +26,17 @@ it('has a textarea you can type in', () => {
     .update();
   expect(wrapped.find('textarea').prop('value')).toEqual('new comment');
 });
+
+it('submits a comment and clears the textarea', () => {
+  //enter some text into the textarea
+  wrapped
+    .find('textarea')
+    .simulate('change', { target: { value: 'new comment' } })
+    .update();
+  //fire the submit event and assert the expected value
+  wrapped
+    .find('form')
+    .simulate('submit')
+    .update();
+  expect(wrapped.find('textarea').prop('value')).toEqual('');
+});
