@@ -33,7 +33,9 @@ const CommentBox = props => {
       ></textarea>
       <div>
         <button>Submit Comment</button>
-        <button onClick={fetchComments}>Fetch Comments</button>
+        <button className="fetch-comments" onClick={fetchComments}>
+          Fetch Comments
+        </button>
       </div>
     </form>
   );
