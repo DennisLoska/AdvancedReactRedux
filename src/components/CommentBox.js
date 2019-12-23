@@ -15,6 +15,11 @@ const CommentBox = props => {
     setComment(e.target.value);
   };
 
+  const fetchComments = async e => {
+    e.preventDefault();
+    props.fetchComments();
+  };
+
   return (
     <form onSubmit={submitComment} action="">
       <h4>Add a Comment</h4>
@@ -28,6 +33,7 @@ const CommentBox = props => {
       ></textarea>
       <div>
         <button>Submit Comment</button>
+        <button onClick={fetchComments}>Fetch Comments</button>
       </div>
     </form>
   );
