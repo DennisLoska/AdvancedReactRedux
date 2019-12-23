@@ -1,5 +1,6 @@
 import { SAVE_COMMENT } from 'actions/types';
 import { FETCH_COMMENTS } from 'actions/types';
+import axios from 'axios';
 
 export const saveComment = comment => {
   return {
@@ -9,10 +10,14 @@ export const saveComment = comment => {
 };
 
 export const fetchComments = async () => {
-  const response = await fetch('https://jsonplaceholder.typicode.com/comments');
-  const comments = await response.json();
+  // Using fetch API
+  //const response = await fetch('https://jsonplaceholder.typicode.com/comments');
+  //const comments = await response.json();
+  const comments = await axios.get(
+    'https://jsonplaceholder.typicode.com/comments'
+  );
   return {
     type: FETCH_COMMENTS,
-    payload: comments
+    payload: comments.data //comments using fetch API
   };
 };
