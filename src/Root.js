@@ -4,8 +4,9 @@ import { createStore } from 'redux';
 import reducers from 'reducers';
 
 //used in order to provide all test components with the redux store
-export default props => {
+//initialState is created for testing purposes - default is {}
+export default ({ children, initialState = {} }) => {
   return (
-    <Provider store={createStore(reducers, {})}>{props.children}</Provider>
+    <Provider store={createStore(reducers, initialState)}>{children}</Provider>
   );
 };
