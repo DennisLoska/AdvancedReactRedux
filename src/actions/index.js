@@ -9,10 +9,6 @@ export const saveComment = comment => {
 };
 
 export const fetchComments = () => {
-  // Using fetch API
-  //const response = await fetch('https://jsonplaceholder.typicode.com/comments');
-  //const comments = await response.json();
-  
   const comments = axios.get('https://jsonplaceholder.typicode.com/comments');
   return {
     type: FETCH_COMMENTS,
