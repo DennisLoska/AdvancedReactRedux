@@ -16,7 +16,7 @@ const CommentBox = props => {
     setComment(e.target.value);
   };
 
-  const fetchComments = async e => {
+  const fetchComments = e => {
     e.preventDefault();
     props.fetchComments();
   };
