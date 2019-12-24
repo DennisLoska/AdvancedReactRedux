@@ -3,21 +3,23 @@ import { Route, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import CommentBox from './CommentBox';
 import CommentList from './CommentList';
+import * as actions from 'actions';
 
 const App = props => {
   const renderButton = () => {
-    if (props.auth) return <buuton>Sign out</buuton>;
-    else return <button>Sign In</button>;
+    if (props.auth)
+      return <button onClick={() => props.changeAuth(false)}>Sign out</button>;
+    else return <button onClick={() => props.changeAuth(true)}>Sign In</button>;
   };
 
   const renderHeader = () => {
     return (
       <ul>
         <li>
-          <Link to="/">Home</Link>{' '}
+          <Link to="/">Home</Link>
         </li>
         <li>
-          <Link to="/post">Post a Comment</Link>{' '}
+          <Link to="/post">Post a Comment</Link>
         </li>
         <li>{renderButton()}</li>
       </ul>
@@ -37,4 +39,4 @@ const mapStateToProps = state => {
   return { auth: state.auth };
 };
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, actions)(App);
