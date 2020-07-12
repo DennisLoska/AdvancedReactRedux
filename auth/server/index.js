@@ -1,13 +1,18 @@
 //Starting point of the application
 const express = require('express');
 const http = require('http');
-const boyParser = require('body-parser');
+const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
+const router = require('./router');
 
 const app = express();
 
 // App setup
+
+app.use(morgan('combined'));
+app.use(bodyParser({type: '*/*'}))
+router(app);
 
 // Server setup
 
