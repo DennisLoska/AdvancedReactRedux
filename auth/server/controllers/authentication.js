@@ -7,6 +7,11 @@ const generateToken = (user) => {
     return jwt.encode({ sub: user.id, iat: timeStamp }, config.secret);
 }
 
+exports.signin = (req, res, next) => {
+    //User's email and password already authenticated by local Strategy
+    res.send({ token: generateToken(req.user)});
+}
+
 exports.signup = (req, res, next) => {
     const { email, password } = req.body;
 
