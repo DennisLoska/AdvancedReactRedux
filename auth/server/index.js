@@ -8,14 +8,15 @@ const router = require('./router');
 
 const app = express();
 
-// App setup
+// DB setup
+mongoose.connect('mongodb://localhost/apiAuth');
 
+// App setup
 app.use(morgan('combined'));
 app.use(bodyParser({type: '*/*'}))
 router(app);
 
 // Server setup
-
 const port = process.env.PORT || 3090;
 const server = http.createServer(app);
 
