@@ -1,29 +1,40 @@
 import React from 'react';
 import { reduxForm, Field } from 'redux-form';
+import { connect } from 'react-redux';
+import * as actions from '../../actions';
 
-const SignUp = () => (
-  <div>
-    <form>
-      <fieldset>
-        <label htmlFor="email">Email</label>
-        <Field
-          name="email"
-          type="text"
-          component="input"
-          autoComplete="none"
-        />
-      </fieldset>
-      <fieldset>
-        <label htmlFor="password">Password</label>
-        <Field
-          name="password"
-          type="password"
-          component="input"
-          autoComplete="none"
-        />
-      </fieldset>
-    </form>
-  </div>
-);
+const SignUp = (props) => {
+  const { handleSubmit, signUp } = props;
 
-export default reduxForm({ form: 'signup' })(SignUp);
+  const onSignUp = (formProps) => {
+    signUp(formProps);
+  };
+
+  return (
+    <div>
+      <form onSubmit={handleSubmit(onSignUp)}>
+        <fieldset>
+          <label htmlFor="email">Email</label>
+          <Field
+            name="email"
+            type="text"
+            component="input"
+            autoComplete="none"
+          />
+        </fieldset>
+        <fieldset>
+          <label htmlFor="password">Password</label>
+          <Field
+            name="password"
+            type="password"
+            component="input"
+            autoComplete="none"
+          />
+        </fieldset>
+        <button type="submit">Sign up</button>
+      </form>
+    </div>
+  );
+};
+
+export default connect(null, actions)(reduxForm({ form: 'signup' })(SignUp));
