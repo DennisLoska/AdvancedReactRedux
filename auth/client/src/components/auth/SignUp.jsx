@@ -1,5 +1,6 @@
 import React from 'react';
 import { reduxForm, Field } from 'redux-form';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 
@@ -37,4 +38,7 @@ const SignUp = (props) => {
   );
 };
 
-export default connect(null, actions)(reduxForm({ form: 'signup' })(SignUp));
+export default compose(
+  connect(null, actions),
+  reduxForm({ form: 'signup' }),
+)(SignUp);
