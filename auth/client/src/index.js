@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Route } from 'react-router-dom';
+import reduxThunk from 'redux-thunk';
 import reducers from './reducers';
 import App from './components/App.jsx';
 import Welcome from './components/Welcome.jsx';
@@ -11,8 +12,14 @@ import SignIn from './components/auth/SignIn.jsx';
 import SignOut from './components/auth/SignOut.jsx';
 import Feature from './components/Feature.jsx';
 
+const store = createStore(
+  reducers,
+  {},
+  applyMiddleware(reduxThunk),
+);
+
 ReactDOM.render(
-  <Provider store={createStore(reducers, {})}>
+  <Provider store={store}>
     <BrowserRouter>
       <App>
         <Route path="/" exact component={Welcome} />
