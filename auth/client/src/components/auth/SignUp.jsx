@@ -5,10 +5,14 @@ import { connect } from 'react-redux';
 import * as actions from '../../actions';
 
 const SignUp = (props) => {
-  const { handleSubmit, signUp } = props;
+  const {
+    handleSubmit, signUp, errorMessage, history,
+  } = props;
 
   const onSignUp = (formProps) => {
-    signUp(formProps);
+    signUp(formProps, () => {
+      history.push('/feature');
+    });
   };
 
   return (
@@ -34,11 +38,16 @@ const SignUp = (props) => {
         </fieldset>
         <button type="submit">Sign up</button>
       </form>
+      { errorMessage || null }
     </div>
   );
 };
 
+const mapStateToProps = (state) => ({
+  errorMessage: state.auth.errorMessage,
+});
+
 export default compose(
-  connect(null, actions),
+  connect(mapStateToProps, actions),
   reduxForm({ form: 'signup' }),
 )(SignUp);

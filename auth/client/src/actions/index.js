@@ -1,10 +1,19 @@
 import axios from 'axios';
-import { SIGN_IN, SIGN_UP, SIGN_OUT } from './types';
+import {
+  SIGN_IN, SIGN_UP, SIGN_OUT, AUTH_ERROR,
+} from './types';
 
-export const signUp = ({ email, password }) => async (dispatch) => {
+export const signUp = ({ email, password }, callback) => async (dispatch) => {
   console.log(email, password);
-  const token = await axios.post('http://localhost:3090/signup', { email, password });
-  dispatch({ type: SIGN_UP, payload: { email, password, token } });
+  try {
+    const res = await axios.post('http://localhost:3090/signup', { email, password });
+    const { token } = res.data;
+    dispatch({ type: SIGN_UP, payload: token });
+    callback();
+  } catch (error) {
+    const errorMessage = error.response.data.error || 'Sign up failed!';
+    dispatch({ type: AUTH_ERROR, payload: errorMessage });
+  }
 };
 
 export const signIn = (email, password) => {
