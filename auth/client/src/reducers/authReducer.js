@@ -1,5 +1,5 @@
 import {
-  SIGN_IN, AUTH_USER, AUTH_ERROR,
+  AUTH_USER, AUTH_ERROR,
 } from '../actions/types';
 
 export default (state = {}, action) => {
