@@ -13,8 +13,9 @@ import SignOut from './components/auth/SignOut.jsx';
 import Feature from './components/Feature.jsx';
 
 const store = createStore(
-  reducers,
-  {},
+  reducers, {
+    auth: { authenticated: localStorage.getItem('token') },
+  },
   applyMiddleware(reduxThunk),
 );
 

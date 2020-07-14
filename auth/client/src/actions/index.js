@@ -9,6 +9,7 @@ export const signUp = ({ email, password }, callback) => async (dispatch) => {
     const res = await axios.post('http://localhost:3090/signup', { email, password });
     const { token } = res.data;
     dispatch({ type: SIGN_UP, payload: token });
+    localStorage.setItem('token', token);
     callback();
   } catch (error) {
     const errorMessage = error.response.data.error || 'Sign up failed!';
