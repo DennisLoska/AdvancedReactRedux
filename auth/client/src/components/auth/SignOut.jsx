@@ -1,5 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../../actions';
 
-export default () => (
-  <div>Hi</div>
-);
+const SignOut = (props) => {
+  const { signOut } = props;
+
+  useEffect(() => {
+    signOut();
+  }, [signOut]);
+
+  return <div>Sorry to see you go.</div>;
+};
+
+export default connect(null, actions)(SignOut);
